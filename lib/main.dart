@@ -1,3 +1,4 @@
+import 'package:dorble/Variables/stats.dart';
 import 'package:dorble/pages/home_page.dart';
 import 'package:dorble/pages/daily_dorble.dart';
 import 'package:dorble/pages/stats_page.dart';
@@ -9,7 +10,12 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => DailyStats()),
+        ChangeNotifierProvider(create: (context) => UnlimitedStats()),
+      ],
       child: const MyApp(),
     ),
   );

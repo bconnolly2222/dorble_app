@@ -1,7 +1,9 @@
 import 'package:dorble/Layouts/dorble_gridunlimited.dart';
+import 'package:dorble/Variables/stats.dart';
 import 'package:dorble/word_database.dart';
 import 'package:flutter/material.dart';
 import 'package:dorble/Variables/list_variables_unlimited.dart';
+import 'package:provider/provider.dart';
 
 class UnlimitedDorble extends StatefulWidget {
   const UnlimitedDorble({super.key});
@@ -206,6 +208,9 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
         correctWord ++;
         if (correctWord == 2) {
           winningDialog(context);
+          correctWord = 0;
+          Provider.of<UnlimitedStats>(context, listen: false).gameWon();
+          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
         }
         indexUn = 7; // Set indexUn to a value that prevents further input
         return;
@@ -268,7 +273,10 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           gameoverIndicator();
           answerIndicatorUn();
           answerIndicatorUnRight();
+          correctWord = 0;
           indexUn = 7; // Set indexUn to a value that prevents further input
+          Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
+          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }
@@ -379,6 +387,9 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
         correctWord ++;
         if (correctWord == 2) {
           winningDialog(context);
+          correctWord = 0;
+          Provider.of<UnlimitedStats>(context, listen: false).gameWon();
+          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
         }
         indexUnRight = 7; // Set indexUn to a value that prevents further input
         return;
@@ -441,7 +452,10 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           gameoverIndicator();
           answerIndicatorUn();
           answerIndicatorUnRight();
+          correctWord = 0;
           indexUnRight = 7; // Set indexUn to a value that prevents further input
+          Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
+          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }

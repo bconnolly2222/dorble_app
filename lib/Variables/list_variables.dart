@@ -100,8 +100,6 @@ int answerIndicatorRightIndex = 0;
 //game win - both words right
 int correctWordDaily = 0;
 
-
-
 //Variables and function for keyboard coloring
 List defkeybcolor = [158, 158, 158];
 

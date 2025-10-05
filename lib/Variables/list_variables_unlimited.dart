@@ -99,8 +99,6 @@ int answerIndicatorUnRightIndex = 0;
 //game win - both words right
 int correctWord = 0;
 
-
-
 //Variables and function for keyUnboard coloring
 List defkeyUnbcolor = [158, 158, 158];
 

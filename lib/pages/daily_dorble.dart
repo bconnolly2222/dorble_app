@@ -1,7 +1,9 @@
 import 'package:dorble/Layouts/dorble_grid.dart';
+import 'package:dorble/Variables/stats.dart';
 import 'package:dorble/word_database.dart';
 import 'package:flutter/material.dart';
 import 'package:dorble/Variables/list_variables.dart';
+import 'package:provider/provider.dart';
 
 class DailyDorble extends StatefulWidget {
   const DailyDorble({super.key});
@@ -206,6 +208,9 @@ class _DailyDorbleState extends State<DailyDorble> {
         correctWordDaily ++;
         if (correctWordDaily == 2) {
           winningDialogDaily(context);
+          correctWordDaily = 0;
+          Provider.of<DailyStats>(context, listen: false).gameWon();
+          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
         }
         index = 7; // Set index to a value that prevents further input
         return;
@@ -269,7 +274,10 @@ class _DailyDorbleState extends State<DailyDorble> {
           gameoverIndicatorDaily();
           answerIndicatorDaily();
           answerIndicatorRight();
+          correctWordDaily = 0;
           index = 7; // Set index to a value that prevents further input
+          Provider.of<DailyStats>(context, listen: false).lostStreak();
+          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }
@@ -380,6 +388,9 @@ class _DailyDorbleState extends State<DailyDorble> {
         correctWordDaily ++;
         if (correctWordDaily == 2) {
           winningDialogDaily(context);
+          correctWordDaily = 0;
+          Provider.of<DailyStats>(context, listen: false).gameWon();
+          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
         }
         indexRight = 7; // Set index to a value that prevents further input
         return;
@@ -442,7 +453,10 @@ class _DailyDorbleState extends State<DailyDorble> {
           gameoverIndicatorDaily();
           answerIndicatorDaily();
           answerIndicatorRight();
+          correctWordDaily = 0;
           indexRight = 7; // Set index to a value that prevents further input
+          Provider.of<DailyStats>(context, listen: false).lostStreak();
+          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }
