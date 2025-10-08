@@ -1,6 +1,7 @@
 import 'package:dorble/Variables/list_variables.dart';
 import 'package:dorble/Variables/list_variables_unlimited.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeData defaultTheme = ThemeData(
   colorScheme: ColorScheme.light(
@@ -16,11 +17,14 @@ ThemeData lightTheme = ThemeData(
   )
 );
 
-bool isSwitched = false;
 
 
 class ThemeProvider with ChangeNotifier {
+  late SharedPreferences theme;
+
   ThemeData _themeData = defaultTheme;
+
+  static bool isSwitched = false;
 
   ThemeData get themeData => _themeData;
 
@@ -29,11 +33,27 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ThemeProvider() {
+    init();
+  }
+
+  Future<void> init() async {
+    theme = await SharedPreferences.getInstance();
+    isSwitched = theme.getBool('bool') ?? false;
+    if (isSwitched == false) {
+      themeData = defaultTheme;
+    } else {
+      themeData = lightTheme;
+    }
+  }
+
   void toggleTheme() {
     if (_themeData == defaultTheme) {
       themeData = lightTheme;
+      theme.setBool('bool', isSwitched);
     } else {
       themeData = defaultTheme;
+      theme.setBool('bool', isSwitched);
     }
   
     if (answerIndicatorIndex == 1 && displayAnswer != "") {

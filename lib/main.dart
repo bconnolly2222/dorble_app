@@ -8,8 +8,11 @@ import 'package:dorble/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await UnlimitedStats.init();
+  await DailyStats.init();
   runApp(
     MultiProvider(
       providers: [
