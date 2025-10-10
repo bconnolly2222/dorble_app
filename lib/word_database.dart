@@ -1,12 +1,14 @@
 import 'dart:math';
 
+import 'package:dorble/Variables/list_variables.dart';
+
 //random variable
 final random = Random();
 int randomIndex = 0;
 
 //Word data base and logic for choosing and updating answers
-String answer = "berry";
-String answerRight = "wrath";
+String answer = daily.getString('answer') ?? "apple";
+String answerRight = daily.getString('answerRight') ?? "place";
 
 String answerUn = "flame";
 String answerUnRight = "proud";

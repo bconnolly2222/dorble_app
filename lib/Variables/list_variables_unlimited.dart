@@ -1,5 +1,31 @@
 // Lists to hold the keyUnboard layUnout
+import 'package:dorble/word_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+//SharedPrefernces for Unlimited Dorble
+late SharedPreferences unlimited;
+bool finishedGameUn = false;
+
+Future<void> initUnlimited() async {
+  unlimited = await SharedPreferences.getInstance();
+  finishedGameUn = unlimited.getBool('finishedGameUn') ?? false;
+  if (finishedGameUn == true) {
+    randomIndex = random.nextInt(solutionList.length);
+    answerUn = solutionList[randomIndex];
+    unlimited.setString('answerUn', answerUn);
+
+    randomIndex = random.nextInt(solutionList.length);
+    answerUnRight = solutionList[randomIndex];
+    unlimited.setString('answerUnRight', answerUnRight);
+
+    finishedGameUn = false;
+    unlimited.setBool('finishedGameUn', false);
+  } else {
+    answerUn = unlimited.getString('answerUn') ?? 'proud';
+    answerUnRight = unlimited.getString('answerUnRight') ?? 'flame';
+  }
+}
 
 List row1Un = ["", "", "", "" ,""];
 List row2Un = ["", "", "", "" ,""];
@@ -61,7 +87,7 @@ Map xmapUn = {};
 Map xmapUnRight = {};
 
 
-emptyUn(Map xUnmap, List xUn) {
+void emptyUn(Map xUnmap, List xUn) {
   for (String letter in xUn) {
     if (!xUnmap.containsKey(letter)) {
       xUnmap[letter] = 0;
@@ -71,7 +97,7 @@ emptyUn(Map xUnmap, List xUn) {
   }
 }
 
-emptyanswerUn(Map xUnmap, List xUn) {
+void emptyanswerUn(Map xUnmap, List xUn) {
   for (String letter in xUn) {
     if (!xUnmap.containsKey(letter)) {
       xUnmap[letter] = 1;

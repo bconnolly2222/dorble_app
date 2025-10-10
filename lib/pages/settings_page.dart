@@ -1,3 +1,4 @@
+import 'package:dorble/Variables/list_variables.dart';
 import 'package:dorble/Variables/stats.dart';
 import 'package:dorble/themes.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Row(
               children: [
@@ -117,6 +118,43 @@ class _SettingsPageState extends State<SettingsPage> {
                         );
                       },
                     );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey,
+                    foregroundColor: Theme.of(context).colorScheme.primary,
+                    fixedSize: const Size(20, 20),
+                  ),
+                  child: Icon(Icons.clear_all_outlined),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.bar_chart,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Fetch Data",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(
+                  width: 208,
+                ),
+                ElevatedButton(
+                  onPressed: (){
+                    initDaily();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey,

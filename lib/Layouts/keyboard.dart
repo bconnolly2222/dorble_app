@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 double height = 70;
 // Function to build a styled container for each key
-buildStyledContainer(String label) {
+Widget buildStyledContainer(String label) {
   return GestureDetector(
     onTap: () {
       // Handle tap event for the key

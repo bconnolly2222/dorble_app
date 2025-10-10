@@ -20,12 +20,12 @@ ThemeData lightTheme = ThemeData(
 
 
 class ThemeProvider with ChangeNotifier {
-  late SharedPreferences theme;
+  static late SharedPreferences theme;
 
   ThemeData _themeData = defaultTheme;
 
-  static bool isSwitched = false;
-
+  static bool isSwitched = theme.getBool('bool') ?? false;
+  
   ThemeData get themeData => _themeData;
 
   set themeData(ThemeData themeData) {
@@ -39,7 +39,6 @@ class ThemeProvider with ChangeNotifier {
 
   Future<void> init() async {
     theme = await SharedPreferences.getInstance();
-    isSwitched = theme.getBool('bool') ?? false;
     if (isSwitched == false) {
       themeData = defaultTheme;
     } else {

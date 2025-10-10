@@ -1,6 +1,33 @@
 // Lists to hold the keyboard layout
 
+import 'package:dorble/database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+//SharedPrefernces for Daily Dorble
+late SharedPreferences daily;
+DateTime? now;
+DateTime? storedDate;
+
+Future<void> initDaily() async {
+  daily = await SharedPreferences.getInstance();
+  String? lastDate = daily.getString('lastUpdate');
+  if (lastDate != null) {
+    storedDate = DateTime.parse(lastDate);
+  } else {
+    storedDate = null;
+  }
+  now = DateTime.now();
+  if (storedDate == null || now!.year != storedDate!.year || now!.month != storedDate!.month || now!.day != storedDate!.day) {
+    Database.fetchSolutions();
+    daily.setString('lastUpdate', now!.toIso8601String());
+    daily.setInt('index', 0);
+    daily.setInt('indexRight', 0);
+    index = 0;
+    indexRight = 0;
+  }
+  //daily.clear();
+}
 
 List row1 = ["", "", "", "" ,""];
 List row2 = ["", "", "", "" ,""];
@@ -18,16 +45,6 @@ List row5Right = ["", "", "", "" ,""];
 List row6Right = ["", "", "", "" ,""];
 List row7Right = ["", "", "", "" ,""];
 
-
-
-
-
-//Box colors and box color layout
-List yellowBoxColor = [192, 190, 49];
-List greenBoxColor = [106, 170, 100];
-List greyBoxColor = [50, 50, 50];
-List defaultBoxColor = [0, 0, 0];
-
 List colorow1 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
 List colorow2 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
 List colorow3 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
@@ -44,13 +61,23 @@ List colorow5Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, default
 List colorow6Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
 List colorow7Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
 
+List toprow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
+List middlerow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
+List bottomrow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
+
+//Box colors and box color layout
+List yellowBoxColor = [192, 190, 49];
+List greenBoxColor = [106, 170, 100];
+List greyBoxColor = [50, 50, 50];
+List defaultBoxColor = [0, 0, 0];
+List defkeybcolor = [158, 158, 158];
 
 //Variables for logic - DAILY DORBLE
 List x = []; //iterates row for letter
 List y = []; //iterates row for color
 List r = []; //iterates row for right grid color
-int index = 0;
-int indexRight = 0;
+int index = daily.getInt('index') ?? 0;
+int indexRight = daily.getInt('indexRight') ?? 0;
 
 
 
@@ -62,7 +89,7 @@ Map xmap = {};
 Map xmapRight = {};
 
 
-empty(Map xmap, List x) {
+void empty(Map xmap, List x) {
   for (String letter in x) {
     if (!xmap.containsKey(letter)) {
       xmap[letter] = 0;
@@ -72,7 +99,7 @@ empty(Map xmap, List x) {
   }
 }
 
-emptyanswer(Map xmap, List x) {
+void emptyanswer(Map xmap, List x) {
   for (String letter in x) {
     if (!xmap.containsKey(letter)) {
       xmap[letter] = 1;
@@ -100,13 +127,7 @@ int answerIndicatorRightIndex = 0;
 //game win - both words right
 int correctWordDaily = 0;
 
-//Variables and function for keyboard coloring
-List defkeybcolor = [158, 158, 158];
-
-List toprow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
-List middlerow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
-List bottomrow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
-
+//function for keyboard coloring
 void keyboardcolor(String letter, List color) {
   switch (letter) {
     case "Q":

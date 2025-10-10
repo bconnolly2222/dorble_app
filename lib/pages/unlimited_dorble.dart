@@ -211,6 +211,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           correctWord = 0;
           Provider.of<UnlimitedStats>(context, listen: false).gameWon();
           Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
+          finishedGameUn = true;
+          unlimited.setBool('finishedGameUn', true);
         }
         indexUn = 7; // Set indexUn to a value that prevents further input
         return;
@@ -275,6 +277,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           answerIndicatorUnRight();
           correctWord = 0;
           indexUn = 7; // Set indexUn to a value that prevents further input
+          finishedGameUn = true;
+          unlimited.setBool('finishedGameUn', true);
           Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
           Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           return;
@@ -390,6 +394,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           correctWord = 0;
           Provider.of<UnlimitedStats>(context, listen: false).gameWon();
           Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
+          finishedGameUn = true;
+          unlimited.setBool('finishedGameUn', true);
         }
         indexUnRight = 7; // Set indexUn to a value that prevents further input
         return;
@@ -454,6 +460,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           answerIndicatorUnRight();
           correctWord = 0;
           indexUnRight = 7; // Set indexUn to a value that prevents further input
+          finishedGameUn = true;
+          unlimited.setBool('finishedGameUn', true);
           Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
           Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           return;
@@ -552,7 +560,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
   }
 
   // Function to build a styled container for each key
-  buildStyledContainerUn(String label, List color) {
+  Widget buildStyledContainerUn(String label, List color) {
     return GestureDetector(
       onTap: () {
         tappedUn(label);
@@ -762,9 +770,14 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       //generate new solutions
       randomIndex = random.nextInt(solutionList.length);
       answerUn = solutionList[randomIndex];
+      unlimited.setString('answerUn', answerUn);
 
       randomIndex = random.nextInt(solutionList.length);
       answerUnRight = solutionList[randomIndex];
+      unlimited.setString('answerUnRight', answerUnRight);
+
+      finishedGameUn = false;
+      unlimited.setBool('finishedGameUn', false);
 
       // Lists to hold the keyUnboard layUnout
       row1Un = ["", "", "", "" ,""];

@@ -213,6 +213,7 @@ class _DailyDorbleState extends State<DailyDorble> {
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
         }
         index = 7; // Set index to a value that prevents further input
+        daily.setInt('index', index);
         return;
 
       //Change box color and move to next row
@@ -276,6 +277,7 @@ class _DailyDorbleState extends State<DailyDorble> {
           answerIndicatorRight();
           correctWordDaily = 0;
           index = 7; // Set index to a value that prevents further input
+          daily.setInt('index', index);
           Provider.of<DailyStats>(context, listen: false).lostStreak();
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
@@ -393,6 +395,7 @@ class _DailyDorbleState extends State<DailyDorble> {
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
         }
         indexRight = 7; // Set index to a value that prevents further input
+        daily.setInt('indexRight', index);
         return;
 
       //Change box color and move to next row
@@ -455,6 +458,7 @@ class _DailyDorbleState extends State<DailyDorble> {
           answerIndicatorRight();
           correctWordDaily = 0;
           indexRight = 7; // Set index to a value that prevents further input
+          daily.setInt('indexRight', index);
           Provider.of<DailyStats>(context, listen: false).lostStreak();
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
@@ -553,7 +557,7 @@ class _DailyDorbleState extends State<DailyDorble> {
   }
 
   // Function to build a styled container for each key
-  buildStyledContainer(String label, List color) {
+  Widget buildStyledContainer(String label, List color) {
     return GestureDetector(
       onTap: () {
         tapped(label);
@@ -759,10 +763,107 @@ class _DailyDorbleState extends State<DailyDorble> {
 
   //function to update game daily
   void newGameDaily() {
+    setState(() {
+      row1 = ["", "", "", "" ,""];
+      row2 = ["", "", "", "" ,""];
+      row3 = ["", "", "", "" ,""];
+      row4 = ["", "", "", "" ,""];
+      row5 = ["", "", "", "" ,""];
+      row6 = ["", "", "", "" ,""];
+      row7 = ["", "", "", "" ,""];
 
+      row1Right = ["", "", "", "" ,""];
+      row2Right = ["", "", "", "" ,""];
+      row3Right = ["", "", "", "" ,""];
+      row4Right = ["", "", "", "" ,""];
+      row5Right = ["", "", "", "" ,""];
+      row6Right = ["", "", "", "" ,""];
+      row7Right = ["", "", "", "" ,""];
+
+      colorow1 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow2 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow3 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow4 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow5 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow6 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow7 = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+
+      colorow1Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow2Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow3Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow4Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow5Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow6Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      colorow7Right = [defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor, defaultBoxColor];
+      //Variables for logic - DAILY DORBLE
+      x = []; //iterates row for letter
+      y = []; //iterates row for color
+      r = []; //iterates row for right grid color
+      index = daily.getInt('index') ?? 0;
+      indexRight = daily.getInt('indexRight') ?? 0;
+
+      //map functions
+      answermap = {};
+      answermapRight = {};
+      xmap = {};
+      xmapRight = {};
+
+      //top indicator
+      display = "";
+      displayColor = Colors.transparent;
+
+      //answer indicator
+      displayAnswer = "";
+      displayAnswerColor = Colors.transparent;
+      displayRightAnswer = "";
+      displayRightColor = Colors.transparent;
+
+      //index for theme switch
+      answerIndicatorIndex = 0;
+      answerIndicatorRightIndex = 0;
+
+      //game win - both words right
+      correctWordDaily = 0;
+
+
+      toprow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
+      middlerow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
+      bottomrow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
+    });
   }
 
 
+  bool _dialogShown = false; // To ensure the dialog is shown only once
+  @override
+  void initState() {
+    super.initState();
+      if (index == 0 && indexRight == 0) {
+        newGameDaily();
+      }
+      // Wait until the first frame is rendered
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (index == 7 && indexRight == 7 && _dialogShown == false) {
+        _dialogShown = true; // Prevent multiple dialogs if rebuilds happen
+        _showWelcomeDialog();
+      }
+    });
+  }
+
+  void _showWelcomeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Completed'),
+        content: Text('You have already completed today\'s Daily Dorble. Come back tomorrow for a new challenge! Today\'s solutions: ${answer.toUpperCase()} and ${answerRight.toUpperCase()}'),
+        actions: [
+          TextButton(
+            child: Text('Close'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
