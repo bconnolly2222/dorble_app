@@ -31,20 +31,24 @@ class DailyStats with ChangeNotifier{
 
   void gamesPlayedCounter() {
     if (index == 7 && indexRight != 7) {
-        guesses = guesses + indexRight + 1;
-        dailyStats.setInt('guesses', guesses);
-        gamesPlayed ++;
-        dailyStats.setInt('gamesPlayed', gamesPlayed);
+      guesses = guesses + indexRight + 1;
+      dailyStats.setInt('guesses', guesses);
+      gamesPlayed ++;
+      dailyStats.setInt('gamesPlayed', gamesPlayed);
+      winPercentage = double.parse(((gamesWon / gamesPlayed) * 100).toStringAsFixed(1));
+      dailyStats.setDouble('winPercentage', winPercentage);
+      averageGuesses = double.parse((guesses / gamesPlayed).toStringAsFixed(1));
+      dailyStats.setDouble('averageGuesses', averageGuesses);
     } else if (indexRight == 7 && index != 7) {
-        guesses = guesses + index + 1;
-        dailyStats.setInt('guesses', guesses);
-        gamesPlayed ++;
-        dailyStats.setInt('gamesPlayed', gamesPlayed);
+      guesses = guesses + index + 1;
+      dailyStats.setInt('guesses', guesses);
+      gamesPlayed ++;
+      dailyStats.setInt('gamesPlayed', gamesPlayed);
+      winPercentage = double.parse(((gamesWon / gamesPlayed) * 100).toStringAsFixed(1));
+      dailyStats.setDouble('winPercentage', winPercentage);
+      averageGuesses = double.parse((guesses / gamesPlayed).toStringAsFixed(1));
+      dailyStats.setDouble('averageGuesses', averageGuesses);
     }
-    winPercentage = double.parse(((gamesWon / gamesPlayed) * 100).toStringAsFixed(1));
-    dailyStats.setDouble('winPercentage', winPercentage);
-    averageGuesses = double.parse((guesses / gamesPlayed).toStringAsFixed(1));
-    dailyStats.setDouble('averageGuesses', averageGuesses);
     notifyListeners();
   }
 
@@ -95,16 +99,20 @@ class UnlimitedStats with ChangeNotifier{
       unStats.setInt('guessesUn', guessesUn);
       gamesPlayedUn ++;
       unStats.setInt('gamesPlayedUn', gamesPlayedUn);
+      winPercentageUn = double.parse(((gamesWonUn / gamesPlayedUn) * 100).toStringAsFixed(1));
+      unStats.setDouble('winPercentageUn', winPercentageUn);
+      averageGuessesUn = double.parse((guessesUn / gamesPlayedUn).toStringAsFixed(1));
+      unStats.setDouble('averageGuessesUn', averageGuessesUn);
     } else if (indexUnRight == 7 && indexUn != 7) {
       guessesUn = guessesUn + indexUn + 1;
       unStats.setInt('guessesUn', guessesUn);
       gamesPlayedUn ++;
       unStats.setInt('gamesPlayedUn', gamesPlayedUn);
+      winPercentageUn = double.parse(((gamesWonUn / gamesPlayedUn) * 100).toStringAsFixed(1));
+      unStats.setDouble('winPercentageUn', winPercentageUn);
+      averageGuessesUn = double.parse((guessesUn / gamesPlayedUn).toStringAsFixed(1));
+      unStats.setDouble('averageGuessesUn', averageGuessesUn);
     }
-    winPercentageUn = double.parse(((gamesWonUn / gamesPlayedUn) * 100).toStringAsFixed(1));
-    unStats.setDouble('winPercentageUn', winPercentageUn);
-    averageGuessesUn = double.parse((guessesUn / gamesPlayedUn).toStringAsFixed(1));
-    unStats.setDouble('averageGuessesUn', averageGuessesUn);
     notifyListeners();
   }
 

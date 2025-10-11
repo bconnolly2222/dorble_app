@@ -277,11 +277,11 @@ class _DailyDorbleState extends State<DailyDorble> {
           answerIndicatorDaily();
           answerIndicatorRight();
           correctWordDaily = 0;
+          Provider.of<DailyStats>(context, listen: false).lostStreak();
+          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           index = 7; // Set index to a value that prevents further input
           daily.setInt('index', 7);
           daily.setInt('indexRight', 7);
-          Provider.of<DailyStats>(context, listen: false).lostStreak();
-          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }
@@ -460,11 +460,11 @@ class _DailyDorbleState extends State<DailyDorble> {
           answerIndicatorDaily();
           answerIndicatorRight();
           correctWordDaily = 0;
+          Provider.of<DailyStats>(context, listen: false).lostStreak();
+          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           indexRight = 7; // Set index to a value that prevents further input
           daily.setInt('index', 7);
           daily.setInt('indexRight', 7);
-          Provider.of<DailyStats>(context, listen: false).lostStreak();
-          Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }
@@ -803,8 +803,8 @@ class _DailyDorbleState extends State<DailyDorble> {
       x = []; //iterates row for letter
       y = []; //iterates row for color
       r = []; //iterates row for right grid color
-      index = daily.getInt('index') ?? 0;
-      indexRight = daily.getInt('indexRight') ?? 0;
+      index = 0;
+      indexRight = 0;
 
       //map functions
       answermap = {};
@@ -835,8 +835,6 @@ class _DailyDorbleState extends State<DailyDorble> {
       bottomrow = [defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor,defkeybcolor];
     });
   }
-
-
 
   @override
   void initState() {

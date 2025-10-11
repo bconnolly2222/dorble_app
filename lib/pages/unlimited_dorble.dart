@@ -276,11 +276,11 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           answerIndicatorUn();
           answerIndicatorUnRight();
           correctWord = 0;
+          Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
+          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           indexUn = 7; // Set indexUn to a value that prevents further input
           finishedGameUn = true;
           unlimited.setBool('finishedGameUn', true);
-          Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
-          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }
@@ -459,11 +459,11 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           answerIndicatorUn();
           answerIndicatorUnRight();
           correctWord = 0;
+          Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
+          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           indexUnRight = 7; // Set indexUn to a value that prevents further input
           finishedGameUn = true;
           unlimited.setBool('finishedGameUn', true);
-          Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
-          Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
           return;
         }
       }

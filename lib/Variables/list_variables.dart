@@ -6,25 +6,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //SharedPrefernces for Daily Dorble
 late SharedPreferences daily;
-DateTime? now;
-DateTime? storedDate;
+int? newIndex;
 
 Future<void> initDaily() async {
   daily = await SharedPreferences.getInstance();
-  String? lastDate = daily.getString('lastUpdate');
-  if (lastDate != null) {
-    storedDate = DateTime.parse(lastDate);
-  } else {
-    storedDate = null;
-  }
-  now = DateTime.now();
-  if (storedDate == null || now!.year != storedDate!.year || now!.month != storedDate!.month || now!.day != storedDate!.day) {
-    Database.fetchSolutions();
-    daily.setString('lastUpdate', now!.toIso8601String());
+  await Database.fetchSolutions();
+  int storedIndex = daily.getInt('storedIndex') ?? 0;
+  if (newIndex != null && newIndex != storedIndex) {
     daily.setInt('index', 0);
     daily.setInt('indexRight', 0);
     index = 0;
     indexRight = 0;
+    daily.setInt('storedIndex', newIndex!);
   }
   //daily.clear();
 }

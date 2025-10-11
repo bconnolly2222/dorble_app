@@ -158,7 +158,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('About Dorble'),
-                          content: Text('This is my first ever mobile app, so please share a review with feedback and any issues you encounter! I will contiune to make improvements, fix bugs, and add features over time. Thank you for playing!'),
+                          content: Text('This is our first ever mobile app, so please share a review with feedback and any issues you encounter! I will contiune to make improvements, fix bugs, and add features over time. Thank you for playing!'),
                           actions: <Widget> [
                             TextButton(child: Text('Close'),
                               onPressed: () {

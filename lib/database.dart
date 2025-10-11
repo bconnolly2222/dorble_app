@@ -7,6 +7,7 @@ class Database {
 
   static Map solution = {};
   static Map solution_2 = {};
+  static Map solutionIndex = {};
 
   static Future fetchSolutions() async {
     try {
@@ -17,6 +18,8 @@ class Database {
       solution_2 = await database.select('daily_solution_2').single();
       answerRight = solution_2['daily_solution_2'];
       daily.setString('answerRight', answerRight);
+      solutionIndex = await database.select('index').single();
+      newIndex = solutionIndex['index'];
       //print('Solutions fetched: $answer and $answerRight');
     } catch (e) {
       //print('Error fetching solutions: $e');
