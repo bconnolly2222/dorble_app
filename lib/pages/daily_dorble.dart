@@ -211,9 +211,10 @@ class _DailyDorbleState extends State<DailyDorble> {
           correctWordDaily = 0;
           Provider.of<DailyStats>(context, listen: false).gameWon();
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
+          daily.setInt('index', 7);
+          daily.setInt('indexRight', 7);
         }
         index = 7; // Set index to a value that prevents further input
-        daily.setInt('index', index);
         return;
 
       //Change box color and move to next row
@@ -277,7 +278,8 @@ class _DailyDorbleState extends State<DailyDorble> {
           answerIndicatorRight();
           correctWordDaily = 0;
           index = 7; // Set index to a value that prevents further input
-          daily.setInt('index', index);
+          daily.setInt('index', 7);
+          daily.setInt('indexRight', 7);
           Provider.of<DailyStats>(context, listen: false).lostStreak();
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
@@ -393,9 +395,10 @@ class _DailyDorbleState extends State<DailyDorble> {
           correctWordDaily = 0;
           Provider.of<DailyStats>(context, listen: false).gameWon();
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
+          daily.setInt('index', 7);
+          daily.setInt('indexRight', 7);
         }
         indexRight = 7; // Set index to a value that prevents further input
-        daily.setInt('indexRight', index);
         return;
 
       //Change box color and move to next row
@@ -458,7 +461,8 @@ class _DailyDorbleState extends State<DailyDorble> {
           answerIndicatorRight();
           correctWordDaily = 0;
           indexRight = 7; // Set index to a value that prevents further input
-          daily.setInt('indexRight', index);
+          daily.setInt('index', 7);
+          daily.setInt('indexRight', 7);
           Provider.of<DailyStats>(context, listen: false).lostStreak();
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
           return;
@@ -833,7 +837,7 @@ class _DailyDorbleState extends State<DailyDorble> {
   }
 
 
-  bool _dialogShown = false; // To ensure the dialog is shown only once
+
   @override
   void initState() {
     super.initState();
@@ -842,18 +846,17 @@ class _DailyDorbleState extends State<DailyDorble> {
       }
       // Wait until the first frame is rendered
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (index == 7 && indexRight == 7 && _dialogShown == false) {
-        _dialogShown = true; // Prevent multiple dialogs if rebuilds happen
-        _showWelcomeDialog();
+      if (index == 7 && indexRight == 7) {
+        _showDialog();
       }
     });
   }
 
-  void _showWelcomeDialog() {
+  void _showDialog() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Completed'),
+        title: Text('Completed!'),
         content: Text('You have already completed today\'s Daily Dorble. Come back tomorrow for a new challenge! Today\'s solutions: ${answer.toUpperCase()} and ${answerRight.toUpperCase()}'),
         actions: [
           TextButton(

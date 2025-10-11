@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(HomePage.radius),
                               ),
                               child: Center(
-                                child: Text("Unlimited Dorble", style: TextStyle(color: Colors.white, fontSize: 24),
+                                child: const Text("Unlimited Dorble", style: TextStyle(color: Colors.white, fontSize: 24),
                                 )
                               ),
                             ),
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Center(
-                                    child: Text("Statistics", style: TextStyle(color: Colors.white, fontSize: 24),),
+                                    child: const Text("Statistics", style: TextStyle(color: Colors.white, fontSize: 24),),
                                   ),
                                   Center(
                                     child: Icon(Icons.bar_chart, color: Colors.white, size: 28)
@@ -157,13 +157,40 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Center(
-                                    child: Text("Settings", style: TextStyle(color: Colors.white, fontSize: 24),),
+                                    child: const Text("Settings", style: TextStyle(color: Colors.white, fontSize: 24),),
                                   ),
                                   Center(
                                     child: Icon(Icons.settings, color: Colors.white, size: 28)
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('How to play?'),
+                                  content: Text('There are 2 grids that each contain a hidden 5-letter word. You have 7 attempts to guess the word in each grid. After each guess, the color of the tiles will change to show how close your guess was to each word. A letter in the correct position will turn green, a letter in the word but in the wrong position will turn yellow, and a letter not in the word will turn gray. Good luck and have fun!'),
+                                  actions: <Widget> [
+                                    TextButton(child: Text('Close'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ]
+                                );
+                              },
+                            );
+                          },
+                          child: Text('How to play?',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 18,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),

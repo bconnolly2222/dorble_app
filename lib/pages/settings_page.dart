@@ -1,4 +1,3 @@
-import 'package:dorble/Variables/list_variables.dart';
 import 'package:dorble/Variables/stats.dart';
 import 'package:dorble/themes.dart';
 import 'package:flutter/material.dart';
@@ -137,24 +136,39 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 20,
                 ),
                 Icon(
-                  Icons.bar_chart,
+                  Icons.info_outline,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 SizedBox(
                   width: 10,
                 ),
-                Text("Fetch Data",
+                Text("About",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
                     fontSize: 20,
                   ),
                 ),
                 SizedBox(
-                  width: 208,
+                  width: 258,
                 ),
                 ElevatedButton(
                   onPressed: (){
-                    initDaily();
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('About Dorble'),
+                          content: Text('This is my first ever mobile app, so please share a review with feedback and any issues you encounter! I will contiune to make improvements, fix bugs, and add features over time. Thank you for playing!'),
+                          actions: <Widget> [
+                            TextButton(child: Text('Close'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ]
+                        );
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey,
@@ -164,6 +178,16 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Icon(Icons.clear_all_outlined),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text('New games coming soon!',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: 15,
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ],
         ),
