@@ -1,8 +1,10 @@
 import 'package:dorble/Layouts/dorble_gridunlimited.dart';
 import 'package:dorble/Variables/stats.dart';
+import 'package:dorble/database.dart';
 import 'package:dorble/word_database.dart';
 import 'package:flutter/material.dart';
 import 'package:dorble/Variables/list_variables_unlimited.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 class UnlimitedDorble extends StatefulWidget {
@@ -588,7 +590,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
 
   //function to build the keyboard layout
   Widget keyboardUn() {
-    return Padding(padding: const EdgeInsets.only(bottom: 40),
+    return Padding(padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
           Row(
@@ -849,6 +851,43 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       bottomrowUn = [defkeyUnbcolor,defkeyUnbcolor,defkeyUnbcolor,defkeyUnbcolor,defkeyUnbcolor,defkeyUnbcolor,defkeyUnbcolor];
     });
   }
+  
+  BannerAd? _bannerAd;
+  bool _isAdLoaded = false;
+  
+  @override
+  void initState() {
+    super.initState();
+    loadBannerAd();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bannerAd?.dispose();
+  }
+
+  void loadBannerAd() {
+    final String adUnitId = testAdUnitId; // Test Ad Unit ID
+
+    final BannerAd banner = BannerAd(
+      adUnitId: adUnitId,
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+            _isAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, LoadAdError error) {
+          ad.dispose();
+        },
+      ),
+    );
+    banner.load();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -992,6 +1031,12 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           Center(
             child: keyboardUn(),
           ),
+          if (showAds && _isAdLoaded && _bannerAd != null)
+            SizedBox(
+              width: _bannerAd!.size.width.toDouble(),
+              height: _bannerAd!.size.height.toDouble(),
+              child: AdWidget(ad: _bannerAd!),
+            ),
         ],
       ),
     );

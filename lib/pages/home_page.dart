@@ -1,5 +1,7 @@
 import 'package:dorble/Variables/list_variables.dart';
+import 'package:dorble/database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,15 +17,47 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  BannerAd? _bannerAd;
+  bool _isAdLoaded = false;
   
+  @override
+  void initState() {
+    super.initState();
+    loadBannerAd();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bannerAd?.dispose();
+  }
+
+  void loadBannerAd() {
+    final String adUnitId = testAdUnitId; // Test Ad Unit ID
+
+    final BannerAd banner = BannerAd(
+      adUnitId: adUnitId,
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+            _isAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, LoadAdError error) {
+          ad.dispose();
+        },
+      ),
+    );
+    banner.load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      //Removed appbar for cleaner look
-      //appBar: AppBar(
-        //backgroundColor: Colors.grey[600],
-        //),
       body: Center(
         child: RefreshIndicator(
           onRefresh: initDaily,
@@ -35,9 +69,9 @@ class _HomePageState extends State<HomePage> {
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: IntrinsicHeight(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                    
+                        SizedBox(height: 170), // Spacer
                         //Title of home page
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -194,6 +228,14 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 100), // Spacer
+                        // Display the banner ad if it's loaded
+                        if (showAds && _isAdLoaded && _bannerAd != null)
+                          SizedBox(
+                            width: _bannerAd!.size.width.toDouble(),
+                            height: _bannerAd!.size.height.toDouble(),
+                            child: AdWidget(ad: _bannerAd!),
+                          ),
                       ],
                     ),
                   ),

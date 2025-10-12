@@ -2,6 +2,11 @@ import 'package:dorble/Variables/list_variables.dart';
 import 'package:dorble/word_database.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+String testAdUnitId = 'ca-app-pub-3940256099942544/9214589741';
+bool showAds = false;
+
+//E3-j4zW*YL8RShq   password to supabase
+
 class Database {
   static final database = Supabase.instance.client.from('daily_solution');
 

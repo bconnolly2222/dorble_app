@@ -8,13 +8,14 @@ import 'package:dorble/pages/unlimited_dorble.dart';
 import 'package:dorble/pages/settings_page.dart';
 import 'package:dorble/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-//E3-j4zW*YL8RShq   password to supabase
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await MobileAds.instance.initialize();
   await UnlimitedStats.init();
   await DailyStats.init();
   await Supabase.initialize(
