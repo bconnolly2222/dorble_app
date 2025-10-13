@@ -3,7 +3,7 @@ import 'package:dorble/word_database.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 String testAdUnitId = 'ca-app-pub-3940256099942544/9214589741';
-bool showAds = false;
+bool showAds = true;
 
 //E3-j4zW*YL8RShq   password to supabase
 
