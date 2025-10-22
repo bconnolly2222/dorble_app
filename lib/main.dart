@@ -26,7 +26,6 @@ void main() async {
   );
   await initDaily();
   await initUnlimited();
-  Future.delayed(const Duration(seconds: 3));
   FlutterNativeSplash.remove();
   runApp(
     MultiProvider(
