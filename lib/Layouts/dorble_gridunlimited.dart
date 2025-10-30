@@ -1,8 +1,10 @@
+//DEFAULT GRID LAYOUT - COPIED AND PASTED INTO DORBLE PAGES FOR SETSTATE FUNCTIONALITY
 import 'package:dorble/Variables/list_variables_unlimited.dart';
 import 'package:flutter/material.dart';
 
 //function to build the dorble grid containers
 Widget dorbleGridContainer(String input, List color) {
+
   return Padding(
     padding: const EdgeInsets.all(2),
     child: Column(

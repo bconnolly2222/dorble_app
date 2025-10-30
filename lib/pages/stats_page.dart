@@ -248,12 +248,15 @@ class _StatsPageState extends State<StatsPage> {
               ),
             ],
           ),
-          SizedBox(height: 300),
+          Expanded(child: SizedBox()),
           if (showAds && _isAdLoaded && _bannerAd != null)
-            SizedBox(
-              width: _bannerAd!.size.width.toDouble(),
-              height: _bannerAd!.size.height.toDouble(),
-              child: AdWidget(ad: _bannerAd!),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 55),
+              child: SizedBox(
+                width: _bannerAd!.size.width.toDouble(),
+                height: _bannerAd!.size.height.toDouble(),
+                child: AdWidget(ad: _bannerAd!),
+              ),
             ),
         ],
       ),

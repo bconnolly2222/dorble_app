@@ -56,6 +56,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQueryData = MediaQuery.of(context);
+    final screenHeight = mediaQueryData.size.height;
+    final screenWidth = mediaQueryData.size.width;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
@@ -71,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 170), // Spacer
+                        SizedBox(height: screenHeight / 10), // Spacer
                         //Title of home page
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -108,8 +112,8 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
-                              height: HomePage.height,
-                              width: HomePage.width,
+                              height: screenHeight / 12,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 204, 195, 70),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
@@ -130,8 +134,8 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
-                              height: HomePage.height,
-                              width: HomePage.width,
+                              height: screenHeight / 12,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 35, 146, 50),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
@@ -152,8 +156,8 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
-                              height: HomePage.height,
-                              width: HomePage.width,
+                              height: screenHeight / 12,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 216, 84, 75),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
@@ -181,8 +185,8 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
-                              height: HomePage.height,
-                              width: HomePage.width,
+                              height: screenHeight / 12,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 89, 95, 89),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
@@ -228,13 +232,16 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 100), // Spacer
+                        Expanded(child: SizedBox()), // Spacer
                         // Display the banner ad if it's loaded
                         if (showAds && _isAdLoaded && _bannerAd != null)
-                          SizedBox(
-                            width: _bannerAd!.size.width.toDouble(),
-                            height: _bannerAd!.size.height.toDouble(),
-                            child: AdWidget(ad: _bannerAd!),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 55),
+                            child: SizedBox(
+                              width: _bannerAd!.size.width.toDouble(),
+                              height: _bannerAd!.size.height.toDouble(),
+                              child: AdWidget(ad: _bannerAd!),
+                            ),
                           ),
                       ],
                     ),

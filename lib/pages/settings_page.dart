@@ -90,21 +90,22 @@ class _SettingsPageState extends State<SettingsPage> {
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(
-                  width: 211,
-                ),
-                Switch(
-                  value: ThemeProvider.isSwitched,
-                  onChanged: (bool value) {
-                    setState(() {
-                      ThemeProvider.isSwitched = value;
-                    });
-                    Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-                  },
-                  activeThumbColor: Colors.white,
-                  activeTrackColor: Colors.grey,
-                  inactiveThumbColor: Colors.black87,
-                  inactiveTrackColor: Colors.white70,
+                Expanded(child: SizedBox()),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Switch(
+                    value: ThemeProvider.isSwitched,
+                    onChanged: (bool value) {
+                      setState(() {
+                        ThemeProvider.isSwitched = value;
+                      });
+                      Provider.of<ThemeProvider>(context, listen: false).toggleTheme(); 
+                    },
+                    activeThumbColor: Colors.white,
+                    activeTrackColor: Colors.grey,
+                    inactiveThumbColor: Colors.black87,
+                    inactiveTrackColor: Colors.white70,
+                  ),
                 ),
               ],
             ),
@@ -129,41 +130,42 @@ class _SettingsPageState extends State<SettingsPage> {
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(
-                  width: 208,
-                ),
-                ElevatedButton(
-                  onPressed: (){
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('WARNING:'),
-                          content: Text('Are you sure you want to erase your statistics data? This will delete both Daily and Unlimited Stats.'),
-                          actions: <Widget> [
-                            TextButton(child: Text('Cancel'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            TextButton(child: Text('RESET'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                Provider.of<DailyStats>(context, listen: false).clearSharedPref();
-                                Provider.of<UnlimitedStats>(context, listen: false).clearSharedPref();
-                              },
-                            ),
-                          ]
-                        );
-                      },
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey,
-                    foregroundColor: Theme.of(context).colorScheme.primary,
-                    fixedSize: const Size(20, 20),
+                Expanded(child: SizedBox()),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: ElevatedButton(
+                    onPressed: (){
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('WARNING:'),
+                            content: Text('Are you sure you want to erase your statistics data? This will delete both Daily and Unlimited Stats.'),
+                            actions: <Widget> [
+                              TextButton(child: Text('Cancel'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(child: Text('RESET'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Provider.of<DailyStats>(context, listen: false).clearSharedPref();
+                                  Provider.of<UnlimitedStats>(context, listen: false).clearSharedPref();
+                                },
+                              ),
+                            ]
+                          );
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      foregroundColor: Theme.of(context).colorScheme.primary,
+                      fixedSize: const Size(20, 20),
+                    ),
+                    child: Icon(Icons.clear_all_outlined),
                   ),
-                  child: Icon(Icons.clear_all_outlined),
                 ),
               ],
             ),
@@ -188,36 +190,37 @@ class _SettingsPageState extends State<SettingsPage> {
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(
-                  width: 258,
-                ),
-                ElevatedButton(
-                  onPressed: (){
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('About Dorble'),
-                          content: Text('This is our first ever mobile app, so please share a review with feedback and any issues you encounter! We will contiune to make improvements, fix bugs, and add features over time. Thank you for playing!'),
-                          actions: <Widget> [
-                            TextButton(child: Text('Close'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ]
-                        );
-                      },
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey,
-                    foregroundColor: Theme.of(context).colorScheme.primary,
-                    fixedSize: const Size(20, 20),
+                Expanded(child: SizedBox()),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: ElevatedButton(
+                    onPressed: (){
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('About Dorble'),
+                            content: Text('This is our first ever mobile app, so please share a review with feedback and any issues you encounter! We will contiune to make improvements, fix bugs, and add features over time. Thank you for playing!'),
+                            actions: <Widget> [
+                              TextButton(child: Text('Close'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ]
+                          );
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      foregroundColor: Theme.of(context).colorScheme.primary,
+                      fixedSize: const Size(20, 20),
+                    ),
+                    child: Icon(Icons.clear_all_outlined),
                   ),
-                  child: Icon(Icons.clear_all_outlined),
                 ),
-              ],
+              ],  
             ),
             SizedBox(
               height: 10,
@@ -229,12 +232,15 @@ class _SettingsPageState extends State<SettingsPage> {
                 fontStyle: FontStyle.italic,
               ),
             ),
-            SizedBox(height: 550),
+            Expanded(child: SizedBox()),
             if (showAds && _isAdLoaded && _bannerAd != null)
-              SizedBox(
-                width: _bannerAd!.size.width.toDouble(),
-                height: _bannerAd!.size.height.toDouble(),
-                child: AdWidget(ad: _bannerAd!),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 55),
+                child: SizedBox(
+                  width: _bannerAd!.size.width.toDouble(),
+                  height: _bannerAd!.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd!),
+                ),
               ),
           ],
         ),

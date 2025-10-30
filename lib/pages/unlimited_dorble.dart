@@ -1,4 +1,3 @@
-import 'package:dorble/Layouts/dorble_gridunlimited.dart';
 import 'package:dorble/Variables/stats.dart';
 import 'package:dorble/database.dart';
 import 'package:dorble/word_database.dart';
@@ -514,6 +513,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       } else if (xUn[0] != "") {
         xUn[0] = "";
       }
+      displayUn = "";
+      displayColorUn = Colors.transparent;
     });
   }
 
@@ -561,16 +562,214 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
     });
   }
 
+  //function to build the dorble grid containers
+  Widget dorbleGridContainer(String input, List color) {
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidth = mediaQueryData.size.width;
+
+    return Padding(
+      padding: const EdgeInsets.all(2),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: screenWidth * 0.08,
+            height: screenWidth * 0.08,
+            margin: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, color[0], color[1], color[2]),
+              border: Border.all(color: const Color.fromARGB(255, 100, 98, 98)),
+              borderRadius: BorderRadius.circular(2),
+            ),
+            child: Text(input,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  //function to build the dorble grid layout - left
+  Widget dorbleGridUn() {
+    return Padding(padding: const EdgeInsets.only(top: 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row1Un[0], colorow1Un[0]),
+              dorbleGridContainer(row1Un[1], colorow1Un[1]),
+              dorbleGridContainer(row1Un[2], colorow1Un[2]),
+              dorbleGridContainer(row1Un[3], colorow1Un[3]),
+              dorbleGridContainer(row1Un[4], colorow1Un[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row2Un[0], colorow2Un[0]),
+              dorbleGridContainer(row2Un[1], colorow2Un[1]),
+              dorbleGridContainer(row2Un[2], colorow2Un[2]),
+              dorbleGridContainer(row2Un[3], colorow2Un[3]),
+              dorbleGridContainer(row2Un[4], colorow2Un[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row3Un[0], colorow3Un[0]),
+              dorbleGridContainer(row3Un[1], colorow3Un[1]),
+              dorbleGridContainer(row3Un[2], colorow3Un[2]),
+              dorbleGridContainer(row3Un[3], colorow3Un[3]),
+              dorbleGridContainer(row3Un[4], colorow3Un[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row4Un[0], colorow4Un[0]),
+              dorbleGridContainer(row4Un[1], colorow4Un[1]),
+              dorbleGridContainer(row4Un[2], colorow4Un[2]),
+              dorbleGridContainer(row4Un[3], colorow4Un[3]),
+              dorbleGridContainer(row4Un[4], colorow4Un[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row5Un[0], colorow5Un[0]),
+              dorbleGridContainer(row5Un[1], colorow5Un[1]),
+              dorbleGridContainer(row5Un[2], colorow5Un[2]),
+              dorbleGridContainer(row5Un[3], colorow5Un[3]),
+              dorbleGridContainer(row5Un[4], colorow5Un[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row6Un[0], colorow6Un[0]),
+              dorbleGridContainer(row6Un[1], colorow6Un[1]),
+              dorbleGridContainer(row6Un[2], colorow6Un[2]),
+              dorbleGridContainer(row6Un[3], colorow6Un[3]),
+              dorbleGridContainer(row6Un[4], colorow6Un[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row7Un[0], colorow7Un[0]),
+              dorbleGridContainer(row7Un[1], colorow7Un[1]),
+              dorbleGridContainer(row7Un[2], colorow7Un[2]),
+              dorbleGridContainer(row7Un[3], colorow7Un[3]),
+              dorbleGridContainer(row7Un[4], colorow7Un[4]),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  //function to build the dorble grid layout - Right
+  Widget dorbleGridUnRight() {
+    return Padding(padding: const EdgeInsets.only(top: 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row1RightUn[0], colorow1RightUn[0]),
+              dorbleGridContainer(row1RightUn[1], colorow1RightUn[1]),
+              dorbleGridContainer(row1RightUn[2], colorow1RightUn[2]),
+              dorbleGridContainer(row1RightUn[3], colorow1RightUn[3]),
+              dorbleGridContainer(row1RightUn[4], colorow1RightUn[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row2RightUn[0], colorow2RightUn[0]),
+              dorbleGridContainer(row2RightUn[1], colorow2RightUn[1]),
+              dorbleGridContainer(row2RightUn[2], colorow2RightUn[2]),
+              dorbleGridContainer(row2RightUn[3], colorow2RightUn[3]),
+              dorbleGridContainer(row2RightUn[4], colorow2RightUn[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row3RightUn[0], colorow3RightUn[0]),
+              dorbleGridContainer(row3RightUn[1], colorow3RightUn[1]),
+              dorbleGridContainer(row3RightUn[2], colorow3RightUn[2]),
+              dorbleGridContainer(row3RightUn[3], colorow3RightUn[3]),
+              dorbleGridContainer(row3RightUn[4], colorow3RightUn[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row4RightUn[0], colorow4RightUn[0]),
+              dorbleGridContainer(row4RightUn[1], colorow4RightUn[1]),
+              dorbleGridContainer(row4RightUn[2], colorow4RightUn[2]),
+              dorbleGridContainer(row4RightUn[3], colorow4RightUn[3]),
+              dorbleGridContainer(row4RightUn[4], colorow4RightUn[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row5RightUn[0], colorow5RightUn[0]),
+              dorbleGridContainer(row5RightUn[1], colorow5RightUn[1]),
+              dorbleGridContainer(row5RightUn[2], colorow5RightUn[2]),
+              dorbleGridContainer(row5RightUn[3], colorow5RightUn[3]),
+              dorbleGridContainer(row5RightUn[4], colorow5RightUn[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row6RightUn[0], colorow6RightUn[0]),
+              dorbleGridContainer(row6RightUn[1], colorow6RightUn[1]),
+              dorbleGridContainer(row6RightUn[2], colorow6RightUn[2]),
+              dorbleGridContainer(row6RightUn[3], colorow6RightUn[3]),
+              dorbleGridContainer(row6RightUn[4], colorow6RightUn[4]),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              dorbleGridContainer(row7RightUn[0], colorow7RightUn[0]),
+              dorbleGridContainer(row7RightUn[1], colorow7RightUn[1]),
+              dorbleGridContainer(row7RightUn[2], colorow7RightUn[2]),
+              dorbleGridContainer(row7RightUn[3], colorow7RightUn[3]),
+              dorbleGridContainer(row7RightUn[4], colorow7RightUn[4]),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
   // Function to build a styled container for each key
   Widget buildStyledContainerUn(String label, List color) {
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidth = mediaQueryData.size.width;
+    final screenHeight = mediaQueryData.size.height;
+
     return GestureDetector(
       onTap: () {
         tappedUn(label);
         tappedUnRight(label);
       },
       child: Container(
-        width: 40,
-        height: 70,
+        width: screenWidth * 0.086,
+        height: screenHeight * 0.075,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -590,6 +789,10 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
 
   //function to build the keyboard layout
   Widget keyboardUn() {
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidth = mediaQueryData.size.width;
+    final screenHeight = mediaQueryData.size.height;
+
     return Padding(padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
@@ -632,8 +835,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
                   enterPressedUnRight();
                 },
                 child: Container(
-                  width: 60,
-                  height: 70,
+                  width: screenWidth * 0.13,
+                  height: screenHeight * 0.075,
                   margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -663,8 +866,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
                   backspaceUnRight();
                 },
                 child: Container(
-                  width: 60,
-                  height: 70,
+                  width: screenWidth * 0.13,
+                  height: screenHeight * 0.075,
                   margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -736,7 +939,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       displayUn = "INVALID WORD";
       displayColorUn = Theme.of(context).colorScheme.secondary;
     });
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
         setState(() {
           displayUn = "";
@@ -891,6 +1094,9 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidth = mediaQueryData.size.width;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
@@ -906,60 +1112,58 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  newGame();
-                },
-                child: Container(
-                  height: 28,
-                  width: 28,
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    border: Border.all(color: Theme.of(context).colorScheme.secondary),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Icon(Icons.add,
-                    color: Theme.of(context).colorScheme.secondary,
+          Padding(
+            padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    newGame();
+                  },
+                  child: Container(
+                    height: 28,
+                    width: 28,
+                    margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(color: Theme.of(context).colorScheme.secondary),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Icon(Icons.add,
+                      color: Theme.of(context).colorScheme.secondary,
+                    )
                   )
-                )
-              ),
-              Text("New Game",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                )
-              ),
-              SizedBox(
-                width: 44,
-              ),
-              Center(
-                child: Container(
-                  width: 130,
-                  height: 30,
-                  margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    border: Border.all(color: displayColorUn),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text(displayUn,
-                    style: TextStyle(
-                      color: displayColorUn,
-                      fontSize: 15,
+                ),
+                Text("New Game",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  )
+                ),
+                Expanded(child: SizedBox()),
+                Center(
+                  child: Container(
+                    width: 130,
+                    height: 30,
+                    margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(color: displayColorUn),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(displayUn,
+                      style: TextStyle(
+                        color: displayColorUn,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           SizedBox(
             height: 2,
@@ -1000,7 +1204,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
               ),
               SizedBox(
                 height: 10,
-                width: 115,
+                width: screenWidth * 0.24,
               ),
               Center(
                 //right answer
@@ -1024,18 +1228,25 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
               ),
             ]
           ),
-          SizedBox(
-            height: 200,
-            width: 40,
-          ),
+          Expanded(child: SizedBox()),
           Center(
             child: keyboardUn(),
           ),
           if (showAds && _isAdLoaded && _bannerAd != null)
-            SizedBox(
-              width: _bannerAd!.size.width.toDouble(),
-              height: _bannerAd!.size.height.toDouble(),
-              child: AdWidget(ad: _bannerAd!),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 55),
+              child: SizedBox(
+                width: _bannerAd!.size.width.toDouble(),
+                height: _bannerAd!.size.height.toDouble(),
+                child: AdWidget(ad: _bannerAd!),
+              ),
+            ),
+          if (showAds == false || _isAdLoaded == false || _bannerAd == null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 55),
+              child: SizedBox(
+                height: 50,
+              ),
             ),
         ],
       ),
