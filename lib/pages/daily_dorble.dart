@@ -1067,7 +1067,7 @@ class _DailyDorbleState extends State<DailyDorble> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Completed!'),
-        content: Text('You have already completed today\'s Daily Dorble. Come back tomorrow for a new challenge! Today\'s solutions: ${answer.toUpperCase()} and ${answerRight.toUpperCase()}'),
+        content: Text('You have already completed today\'s Daily DORBLE! Come back tomorrow for a new challenge! Today\'s solutions: ${answer.toUpperCase()} and ${answerRight.toUpperCase()}'),
         actions: [
           TextButton(
             child: Text('Close'),
@@ -1176,16 +1176,16 @@ class _DailyDorbleState extends State<DailyDorble> {
           SizedBox(
             height: 2,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              dorbleGrid(),
-              SizedBox(
-                width: 15,
-                height: 5,
-              ),
-              dorbleGridRight(),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                dorbleGrid(),
+                Expanded(child: SizedBox()),
+                dorbleGridRight(),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

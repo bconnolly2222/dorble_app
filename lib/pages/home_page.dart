@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.8,
+                              width: screenWidth / 1.7,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 204, 195, 70),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.8,
+                              width: screenWidth / 1.7,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 35, 146, 50),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
@@ -157,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.8,
+                              width: screenWidth / 1.7,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 216, 84, 75),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.8,
+                              width: screenWidth / 1.7,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 89, 95, 89),
                                 borderRadius: BorderRadius.circular(HomePage.radius),

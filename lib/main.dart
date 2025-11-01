@@ -12,10 +12,14 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/services.dart';
 
 
 void main() async {
   WidgetsBinding wb = WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   FlutterNativeSplash.preserve(widgetsBinding: wb);
   await MobileAds.instance.initialize();
   await UnlimitedStats.init();

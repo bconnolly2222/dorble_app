@@ -225,7 +225,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               height: 10,
             ),
-            Text('New games coming soon!',
+            Text('Daily DORBLE! resets at 12:00 AM EST.',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
                 fontSize: 15,

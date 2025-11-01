@@ -17,13 +17,26 @@ Future<void> initUnlimited() async {
 
     randomIndex = random.nextInt(solutionList.length);
     answerUnRight = solutionList[randomIndex];
+    if (answerUnRight == answerUn) {
+      randomIndex = random.nextInt(solutionList.length);
+      answerUnRight = solutionList[randomIndex];
+    }
     unlimited.setString('answerUnRight', answerUnRight);
 
     finishedGameUn = false;
     unlimited.setBool('finishedGameUn', false);
   } else {
-    answerUn = unlimited.getString('answerUn') ?? 'proud';
-    answerUnRight = unlimited.getString('answerUnRight') ?? 'flame';
+    randomIndex = random.nextInt(solutionList.length);
+    answerUn = solutionList[randomIndex];
+
+    randomIndex = random.nextInt(solutionList.length);
+    answerUnRight = solutionList[randomIndex];
+    if (answerUnRight == answerUn) {
+      randomIndex = random.nextInt(solutionList.length);
+      answerUnRight = solutionList[randomIndex];
+    }
+    answerUn = unlimited.getString('answerUn') ?? answerUn;
+    answerUnRight = unlimited.getString('answerUnRight') ?? answerUnRight;
   }
 }
 

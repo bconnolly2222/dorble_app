@@ -1168,16 +1168,16 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           SizedBox(
             height: 2,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              dorbleGridUn(),
-              SizedBox(
-                width: 15,
-                height: 5,
-              ),
-              dorbleGridUnRight(),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                dorbleGridUn(),
+                Expanded(child: SizedBox()),
+                dorbleGridUnRight(),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
