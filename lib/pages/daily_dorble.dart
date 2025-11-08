@@ -43,8 +43,6 @@ class _DailyDorbleState extends State<DailyDorble> {
         case 6:
           x = row7;
           break;
-        default:
-          return;
       }
 
       if (x[0] == "") {
@@ -58,13 +56,8 @@ class _DailyDorbleState extends State<DailyDorble> {
       } else if (x[4] == "") {
         x[4] = input;
       }
-    });
-  }
 
-  //function to handle key taps - right grid
-  void tappedRight(String input) {
-    setState(() {
-      //set row based on index
+      //right grid
       switch (indexRight) {
         case 0:
           r = row1Right;
@@ -87,8 +80,6 @@ class _DailyDorbleState extends State<DailyDorble> {
         case 6:
           r = row7Right;
           break;
-        default:
-          return;
       }
 
       if (r[0] == "") {
@@ -278,9 +269,9 @@ class _DailyDorbleState extends State<DailyDorble> {
           answerIndicatorDaily();
           answerIndicatorRight();
           correctWordDaily = 0;
+          index = 7; // Set index to a value that prevents further input
           Provider.of<DailyStats>(context, listen: false).lostStreak();
           Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
-          index = 7; // Set index to a value that prevents further input
           daily.setInt('index', 7);
           daily.setInt('indexRight', 7);
           return;
@@ -389,6 +380,9 @@ class _DailyDorbleState extends State<DailyDorble> {
         keyboardcolor(r[3], greenBoxColor);
         keyboardcolor(r[4], greenBoxColor);
         correctIndicatorDaily();
+        if (countedGame == true) {
+          gameoverIndicatorDaily();
+        }
         answerIndicatorRight();
         correctWordDaily ++;
         if (correctWordDaily == 2) {
@@ -499,7 +493,7 @@ class _DailyDorbleState extends State<DailyDorble> {
           x = row7;
           break;
         default:
-          return;
+          x = ["", "", "", "", ""];
       }
 
       // Remove the last letter in the current row
@@ -516,12 +510,8 @@ class _DailyDorbleState extends State<DailyDorble> {
       }
       display = "";
       displayColor = Colors.transparent;
-    });
-  }
 
-  //function to backspace - left grid
-  void backspaceRight () {
-    setState(() {
+      //right grid
       switch (indexRight) {
         case 0:
           r = row1Right;
@@ -545,7 +535,7 @@ class _DailyDorbleState extends State<DailyDorble> {
           r = row7Right;
           break;
         default:
-          return;
+          r = ["", "", "", "", ""];
       }
 
       // Remove the last letter in the current row
@@ -766,7 +756,6 @@ class _DailyDorbleState extends State<DailyDorble> {
     return GestureDetector(
       onTap: () {
         tapped(label);
-        tappedRight(label);
       },
       child: Container(
         width: screenWidth * 0.086,
@@ -864,7 +853,6 @@ class _DailyDorbleState extends State<DailyDorble> {
               GestureDetector(
                 onTap: () {
                   backspace();
-                  backspaceRight();
                 },
                 child: Container(
                   width: screenWidth * 0.13,
@@ -973,6 +961,9 @@ class _DailyDorbleState extends State<DailyDorble> {
   //function to update game daily
   void newGameDaily() {
     setState(() {
+
+      countedGame = false;
+      
       row1 = ["", "", "", "" ,""];
       row2 = ["", "", "", "" ,""];
       row3 = ["", "", "", "" ,""];
@@ -1182,6 +1173,14 @@ class _DailyDorbleState extends State<DailyDorble> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 dorbleGrid(),
+                Expanded(child: SizedBox()),
+                ColoredBox(
+                  color: Colors.grey,
+                  child: SizedBox(
+                    width: 1,
+                    height: screenWidth * 0.6,
+                  ),
+                ),
                 Expanded(child: SizedBox()),
                 dorbleGridRight(),
               ],

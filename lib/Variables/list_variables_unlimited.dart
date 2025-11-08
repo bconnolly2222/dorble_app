@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //SharedPrefernces for Unlimited Dorble
 late SharedPreferences unlimited;
 bool finishedGameUn = false;
+bool countedGameUn = false;
 
 Future<void> initUnlimited() async {
   unlimited = await SharedPreferences.getInstance();
@@ -25,6 +26,8 @@ Future<void> initUnlimited() async {
 
     finishedGameUn = false;
     unlimited.setBool('finishedGameUn', false);
+
+    countedGameUn = false;
   } else {
     randomIndex = random.nextInt(solutionList.length);
     answerUn = solutionList[randomIndex];

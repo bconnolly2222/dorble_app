@@ -30,7 +30,7 @@ class DailyStats with ChangeNotifier{
   }
 
   void gamesPlayedCounter() {
-    if (index == 7 && indexRight != 7) {
+    if (index == 7 && indexRight != 7 && countedGame == false) {
       guesses = guesses + indexRight + 1;
       dailyStats.setInt('guesses', guesses);
       gamesPlayed ++;
@@ -39,7 +39,8 @@ class DailyStats with ChangeNotifier{
       dailyStats.setDouble('winPercentage', winPercentage);
       averageGuesses = double.parse((guesses / gamesPlayed).toStringAsFixed(1));
       dailyStats.setDouble('averageGuesses', averageGuesses);
-    } else if (indexRight == 7 && index != 7) {
+      countedGame = true;
+    } else if (indexRight == 7 && index != 7 && countedGame == false) {
       guesses = guesses + index + 1;
       dailyStats.setInt('guesses', guesses);
       gamesPlayed ++;
@@ -48,6 +49,7 @@ class DailyStats with ChangeNotifier{
       dailyStats.setDouble('winPercentage', winPercentage);
       averageGuesses = double.parse((guesses / gamesPlayed).toStringAsFixed(1));
       dailyStats.setDouble('averageGuesses', averageGuesses);
+      countedGame = true;
     }
     notifyListeners();
   }
@@ -94,7 +96,7 @@ class UnlimitedStats with ChangeNotifier{
   }
 
   void gamesPlayedCounter() {
-    if (indexUn == 7 && indexUnRight != 7) {
+    if (indexUn == 7 && indexUnRight != 7 && countedGameUn == false) {
       guessesUn = guessesUn + indexUnRight + 1;
       unStats.setInt('guessesUn', guessesUn);
       gamesPlayedUn ++;
@@ -103,7 +105,8 @@ class UnlimitedStats with ChangeNotifier{
       unStats.setDouble('winPercentageUn', winPercentageUn);
       averageGuessesUn = double.parse((guessesUn / gamesPlayedUn).toStringAsFixed(1));
       unStats.setDouble('averageGuessesUn', averageGuessesUn);
-    } else if (indexUnRight == 7 && indexUn != 7) {
+      countedGameUn = true;
+    } else if (indexUnRight == 7 && indexUn != 7 && countedGameUn == false) {
       guessesUn = guessesUn + indexUn + 1;
       unStats.setInt('guessesUn', guessesUn);
       gamesPlayedUn ++;
@@ -112,6 +115,7 @@ class UnlimitedStats with ChangeNotifier{
       unStats.setDouble('winPercentageUn', winPercentageUn);
       averageGuessesUn = double.parse((guessesUn / gamesPlayedUn).toStringAsFixed(1));
       unStats.setDouble('averageGuessesUn', averageGuessesUn);
+      countedGameUn = true;
     }
     notifyListeners();
   }

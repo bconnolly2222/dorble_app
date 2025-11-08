@@ -16,11 +16,10 @@ class UnlimitedDorble extends StatefulWidget {
 
 class _UnlimitedDorbleState extends State<UnlimitedDorble> {
 
-
   //function to handle key taps
   void tappedUn(String input) {
     setState(() {
-      //set row based on indexUn
+      //set row based on indexUn - left grid
       switch (indexUn) {
         case 0:
           xUn = row1Un;
@@ -43,8 +42,6 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
         case 6:
           xUn = row7Un;
           break;
-        default:
-          return;
       }
 
       if (xUn[0] == "") {
@@ -58,13 +55,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       } else if (xUn[4] == "") {
         xUn[4] = input;
       }
-    });
-  }
 
-  //function to handle key taps - right grid
-  void tappedUnRight(String input) {
-    setState(() {
-      //set row based on indexUn
+      //right grid
       switch (indexUnRight) {
         case 0:
           rUn = row1RightUn;
@@ -87,8 +79,6 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
         case 6:
           rUn = row7RightUn;
           break;
-        default:
-          return;
       }
 
       if (rUn[0] == "") {
@@ -277,9 +267,9 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           answerIndicatorUn();
           answerIndicatorUnRight();
           correctWord = 0;
+          indexUn = 7; // Set indexUn to a value that prevents further input
           Provider.of<UnlimitedStats>(context, listen: false).lostStreak();
           Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
-          indexUn = 7; // Set indexUn to a value that prevents further input
           finishedGameUn = true;
           unlimited.setBool('finishedGameUn', true);
           return;
@@ -388,6 +378,9 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
         keyboardcolorUn(rUn[3], greenBoxColor);
         keyboardcolorUn(rUn[4], greenBoxColor);
         correctIndicator();
+        if (countedGameUn == true) {
+          gameoverIndicator();
+        }
         answerIndicatorUnRight();
         correctWord ++;
         if (correctWord == 2) {
@@ -474,7 +467,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
   //function to backspace
   void backspaceUn () {
     setState(() {
-      //set row based on indexUn
+      //set row based on indexUn - left grid
       switch (indexUn) {
         case 0:
           xUn = row1Un;
@@ -498,7 +491,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           xUn = row7Un;
           break;
         default:
-          return;
+          xUn = ["","","","",""];
       }
 
       // Remove the last letter in the current row
@@ -515,12 +508,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       }
       displayUn = "";
       displayColorUn = Colors.transparent;
-    });
-  }
 
-  //function to backspace - right
-  void backspaceUnRight () {
-    setState(() {
+      //right grid
       switch (indexUnRight) {
         case 0:
           rUn = row1RightUn;
@@ -544,7 +533,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
           rUn = row7RightUn;
           break;
         default:
-          return;
+          rUn = ["","","","",""];
       }
 
       // Remove the last letter in the current row
@@ -765,7 +754,6 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
     return GestureDetector(
       onTap: () {
         tappedUn(label);
-        tappedUnRight(label);
       },
       child: Container(
         width: screenWidth * 0.086,
@@ -863,7 +851,6 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
               GestureDetector(
                 onTap: () {
                   backspaceUn();
-                  backspaceUnRight();
                 },
                 child: Container(
                   width: screenWidth * 0.13,
@@ -983,6 +970,8 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
 
       finishedGameUn = false;
       unlimited.setBool('finishedGameUn', false);
+
+      countedGameUn = false;
 
       // Lists to hold the keyUnboard layUnout
       row1Un = ["", "", "", "" ,""];
@@ -1174,6 +1163,14 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 dorbleGridUn(),
+                Expanded(child: SizedBox()),
+                ColoredBox(
+                  color: Colors.grey,
+                  child: SizedBox(
+                    width: 1,
+                    height: screenWidth * 0.6,
+                  ),
+                ),
                 Expanded(child: SizedBox()),
                 dorbleGridUnRight(),
               ],

@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   BannerAd? _bannerAd;
   bool _isAdLoaded = false;
   
@@ -207,29 +208,39 @@ class _HomePageState extends State<HomePage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            showDialog(
+                            showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('How to play?'),
-                                  content: Text('There are 2 grids that each contain a hidden 5-letter word. You have 7 attempts to guess the word in each grid. After each guess, the color of the tiles will change to show how close your guess was to each word. A letter in the correct position will turn green, a letter in the word but in the wrong position will turn yellow, and a letter not in the word will turn gray. Good luck and have fun!'),
-                                  actions: <Widget> [
-                                    TextButton(child: Text('Close'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
+                                return Container(
+                                  height: screenHeight,
+                                  width: screenWidth,
+                                  color: Colors.black,
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/images/HowToPlay.png',
+                                      fit: BoxFit.contain,
                                     ),
-                                  ]
+                                  ),
                                 );
                               },
                             );
                           },
-                          child: Text('How to play?',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontSize: 18,
-                              fontStyle: FontStyle.italic,
-                            ),
+                          child: Row(
+                            children: [
+                              Expanded(child: SizedBox()),
+                              Text('How to play',
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Icon(Icons.help_sharp,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              Expanded(child: SizedBox()),
+                            ],
                           ),
                         ),
                         Expanded(child: SizedBox()), // Spacer

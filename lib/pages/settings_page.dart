@@ -199,7 +199,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('About Dorble'),
+                            title: Text('About DORBLE!'),
                             content: Text('This is our first ever mobile app, so please share a review with feedback and any issues you encounter! We will contiune to make improvements, fix bugs, and add features over time. Thank you for playing!'),
                             actions: <Widget> [
                               TextButton(child: Text('Close'),
@@ -225,7 +225,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               height: 10,
             ),
-            Text('Daily DORBLE! resets at 12:00 AM EST.',
+            Text('Daily DORBLE! resets at 00:00 A.M. EST (New York)',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
                 fontSize: 15,

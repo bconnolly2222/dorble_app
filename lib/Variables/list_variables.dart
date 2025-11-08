@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //SharedPrefernces for Daily Dorble
 late SharedPreferences daily;
 int? newIndex;
+bool countedGame = false;
 
 Future<void> initDaily() async {
   daily = await SharedPreferences.getInstance();
@@ -18,6 +19,7 @@ Future<void> initDaily() async {
     index = 0;
     indexRight = 0;
     daily.setInt('storedIndex', newIndex!);
+    countedGame = false;
   }
   //daily.clear();
 }
