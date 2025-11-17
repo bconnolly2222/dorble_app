@@ -28,6 +28,10 @@ Future<void> initUnlimited() async {
     unlimited.setBool('finishedGameUn', false);
 
     countedGameUn = false;
+
+    //testing game
+    //answerUn = "flame";
+    //answerUnRight = "proud";
   } else {
     randomIndex = random.nextInt(solutionList.length);
     answerUn = solutionList[randomIndex];
@@ -40,6 +44,10 @@ Future<void> initUnlimited() async {
     }
     answerUn = unlimited.getString('answerUn') ?? answerUn;
     answerUnRight = unlimited.getString('answerUnRight') ?? answerUnRight;
+
+    //testing game
+    //answerUn = "flame";
+    //answerUnRight = "proud";
   }
 }
 

@@ -264,6 +264,10 @@ class _DailyDorbleState extends State<DailyDorble> {
         if (index < 6) {
           index++;
         } else {
+          //condition for left grid gameover but right grid correct
+          if (correctWordDaily == 1) {
+            Provider.of<DailyStats>(context, listen: false).gamesPlayedCounter();
+          }
           // All attempts used, handle game over condition
           gameoverIndicatorDaily();
           answerIndicatorDaily();

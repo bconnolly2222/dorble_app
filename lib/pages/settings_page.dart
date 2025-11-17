@@ -178,7 +178,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 20,
                 ),
                 Icon(
-                  Icons.info_outline,
+                  Icons.help_outline,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 SizedBox(
@@ -223,12 +223,44 @@ class _SettingsPageState extends State<SettingsPage> {
               ],  
             ),
             SizedBox(
-              height: 10,
+              height: 15,
             ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.info_outline,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Version",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 20,
+                  ),
+                ),
+                Expanded(child: SizedBox()),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Text(
+                    '1.0.3a',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
+                  )
+                ),
+              ],  
+            ),
+            SizedBox(height: 15),
             Text('Daily DORBLE! resets at 00:00 A.M. EST (New York)',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
-                fontSize: 15,
+                fontSize: 13,
                 fontStyle: FontStyle.italic,
               ),
             ),

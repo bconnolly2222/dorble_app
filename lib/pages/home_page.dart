@@ -114,13 +114,13 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.7,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 204, 195, 70),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
                               ),
                               child: const Center(
-                                child: Text("Daily Dorble", style: TextStyle(color: Colors.white, fontSize: 24),
+                                child: Text("Daily", style: TextStyle(color: Colors.white, fontSize: 24),
                                 )
                               ),
                             ),
@@ -136,13 +136,13 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.7,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 35, 146, 50),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
                               ),
                               child: Center(
-                                child: const Text("Unlimited Dorble", style: TextStyle(color: Colors.white, fontSize: 24),
+                                child: const Text("Unlimited", style: TextStyle(color: Colors.white, fontSize: 24),
                                 )
                               ),
                             ),
@@ -158,17 +158,18 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.7,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 216, 84, 75),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Center(
                                     child: const Text("Statistics", style: TextStyle(color: Colors.white, fontSize: 24),),
                                   ),
+                                  SizedBox(width: 10),
                                   Center(
                                     child: Icon(Icons.bar_chart, color: Colors.white, size: 28)
                                   ),
@@ -187,17 +188,18 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(HomePage.padding),
                             child: Container(
                               height: screenHeight / 12,
-                              width: screenWidth / 1.7,
+                              width: screenWidth / 1.8,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 89, 95, 89),
                                 borderRadius: BorderRadius.circular(HomePage.radius),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Center(
                                     child: const Text("Settings", style: TextStyle(color: Colors.white, fontSize: 24),),
                                   ),
+                                  SizedBox(width: 10),
                                   Center(
                                     child: Icon(Icons.settings, color: Colors.white, size: 28)
                                   ),

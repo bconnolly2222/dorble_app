@@ -262,6 +262,10 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
         if (indexUn < 6) {
           indexUn++;
         } else {
+          //condition when left grid gameover but right grid correct
+          if (correctWord == 1) {
+            Provider.of<UnlimitedStats>(context, listen: false).gamesPlayedCounter();
+          }
           // All attempts used, handle game over condition
           gameoverIndicator();
           answerIndicatorUn();
