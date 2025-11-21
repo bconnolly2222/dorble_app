@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:dorble/Variables/list_variables_unlimited.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' show parse;
 
 class UnlimitedDorble extends StatefulWidget {
   const UnlimitedDorble({super.key});
@@ -946,7 +948,7 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Congratulations!'),
-          content: Text('You solved this DORBLE!'),
+          content: Text('You solved this DORBLE! Tap each word to see their definitions.'),
           actions: <Widget>[
             TextButton(
               child: Text('Close'),
@@ -1085,10 +1087,31 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
     banner.load();
   }
 
+  Future<Map> fetchDef(String answer) async {
+    // Simulate a network call to fetch the definition
+    final response = await http.get(Uri.parse('https://www.merriam-webster.com/dictionary/$answer'));
+    if (response.statusCode == 200) {
+      final doc = parse(response.body);
+      final title = doc.querySelector('h1')?.text ?? answer;
+      final speech = doc.querySelector('h2')?.text ?? 'No Title Found';
+      final defs = doc.querySelector('.dtText')?.text ?? 'No Definition Found';
+
+      final Map data = {
+        'title': title,
+        'speech': speech,
+        'defs': defs,
+      };
+      return data;
+    } else {
+      throw Exception('Failed to load definition');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
     final screenWidth = mediaQueryData.size.width;
+    final screenHeight = mediaQueryData.size.height;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -1185,20 +1208,107 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
             children: [
               Center(
                 //left answer
-                child: Container(
-                  width: 100,
-                  height: 30,
-                  margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    border: Border.all(color: displayUncolor),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text(displayUnanswer,
-                    style: TextStyle(
-                      color: displayUncolor,
-                      fontSize: 15,
+                child: GestureDetector(
+                  onTap: () {
+                    if (finishedGameUn == false) {
+                      return;
+                    }
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return FutureBuilder(
+                          future: fetchDef(answerUn), 
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Container(
+                                  height: screenHeight * 0.5,
+                                  width: screenWidth,
+                                  color: Colors.black,
+                                  child: Column(
+                                    children: [
+                                      Text(snapshot.data!['title'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 40,
+                                        ),
+                                      ),
+                                      Text(snapshot.data!['speech'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 20, right: 20),
+                                        child: Text('DEF${snapshot.data!['defs']}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                      Padding(
+                                        padding: const EdgeInsets.all(50),
+                                        child: Text('Source: Merriam-Webster.com',
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontStyle: FontStyle.italic
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                              );
+                            } else {
+                              return Container(
+                                height: screenHeight * 0.5,
+                                width: screenWidth,
+                                color: Colors.black,
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 50),
+                                      SizedBox(
+                                        height: 40,
+                                        width: 40,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 15),
+                                      Text('Fetching definition...',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(color: displayUncolor),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(displayUnanswer,
+                      style: TextStyle(
+                        color: displayUncolor,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),
@@ -1209,20 +1319,107 @@ class _UnlimitedDorbleState extends State<UnlimitedDorble> {
               ),
               Center(
                 //right answer
-                child: Container(
-                  width: 100,
-                  height: 30,
-                  margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    border: Border.all(color: displayUnRightcolor),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text(displayUnRightanswer,
-                    style: TextStyle(
-                      color: displayUnRightcolor,
-                      fontSize: 15,
+                child: GestureDetector(
+                  onTap: () {
+                    if (finishedGameUn == false) {
+                      return;
+                    }
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return FutureBuilder(
+                          future: fetchDef(answerUnRight), 
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Container(
+                                  height: screenHeight * 0.5,
+                                  width: screenWidth,
+                                  color: Colors.black,
+                                  child: Column(
+                                    children: [
+                                      Text(snapshot.data!['title'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 40,
+                                        ),
+                                      ),
+                                      Text(snapshot.data!['speech'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 20, right: 20),
+                                        child: Text('DEF${snapshot.data!['defs']}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                      Padding(
+                                        padding: const EdgeInsets.all(50),
+                                        child: Text('Source: Merriam-Webster.com',
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontStyle: FontStyle.italic
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                              );
+                            } else {
+                              return Container(
+                                height: screenHeight * 0.5,
+                                width: screenWidth,
+                                color: Colors.black,
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 50),
+                                      SizedBox(
+                                        height: 40,
+                                        width: 40,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 15),
+                                      Text('Fetching definition...',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(color: displayUnRightcolor),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(displayUnRightanswer,
+                      style: TextStyle(
+                        color: displayUnRightcolor,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),

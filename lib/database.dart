@@ -3,7 +3,8 @@ import 'package:dorble/word_database.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 //ads code
-String testAdUnitId = 'ca-app-pub-3940256099942544/9214589741';
+//'ca-app-pub-3940256099942544/9214589741' is the test ad unit id
+String testAdUnitId = 'ca-app-pub-3041741540866855/9894872786';
 bool showAds = true;
 
 class Database {
