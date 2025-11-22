@@ -1106,7 +1106,7 @@ class _DailyDorbleState extends State<DailyDorble> {
     if (response.statusCode == 200) {
       final doc = parse(response.body);
       final title = doc.querySelector('h1')?.text ?? answer;
-      final speech = doc.querySelector('h2')?.text ?? 'No Title Found';
+      final speech = doc.querySelector('h2')?.text ?? 'No Speech Found';
       final defs = doc.querySelector('.dtText')?.text ?? 'No Definition Found';
 
       final Map data = {
@@ -1245,15 +1245,15 @@ class _DailyDorbleState extends State<DailyDorble> {
                                       Text(snapshot.data!['speech'],
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 15,
+                                          fontSize: 10,
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(left: 20, right: 20),
-                                        child: Text('DEF${snapshot.data!['defs']}',
+                                        child: Text('DEFINITION${snapshot.data!['defs']}',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 25,
+                                            fontSize: 15,
                                           ),
                                         ),
                                       ),
@@ -1356,15 +1356,15 @@ class _DailyDorbleState extends State<DailyDorble> {
                                       Text(snapshot.data!['speech'],
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 15,
+                                          fontSize: 10,
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(left: 20, right: 20),
-                                        child: Text('DEF${snapshot.data!['defs']}',
+                                        child: Text('DEFINITION${snapshot.data!['defs']}',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 25,
+                                            fontSize: 15,
                                           ),
                                         ),
                                       ),

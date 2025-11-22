@@ -247,7 +247,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: Text(
-                    '1.0.3a',
+                    '1.0.1',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
